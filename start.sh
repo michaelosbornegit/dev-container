@@ -1,13 +1,21 @@
 #!/bin/bash
 
-docker build -t mike-dev .
-docker volume create mike-dev
-docker stop mike-dev
-docker rm mike-dev
+if [ $# -eq 0 ]; then
+  echo "Error: Please provide a container name (e.g., mike-dev)"
+  exit 1
+fi
+
+container_name=$1
+
+docker build -t $container_name .
+docker volume create $container_name
+docker stop $container_name
+docker rm $container_name
 docker run \
-  -it \
-  --name='mike-dev' \
+  -it -d \
+  --name=$container_name \
   -v '/var/run/docker.sock':'/var/run/docker.sock':'rw' \
-  -v mike-dev:/home/mike \
-  mike-dev
-docker exec -it mike-dev /bin/zsh
+  -v $container_name:/home/mike \
+  $container_name
+docker exec $container_name sudo chmod 666 /var/run/docker.sock
+docker exec -it $container_name /bin/zsh
