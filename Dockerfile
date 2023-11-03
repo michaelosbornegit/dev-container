@@ -9,6 +9,7 @@ RUN apt-get update && \
     curl \
     sudo \
     gpg \
+    python3-venv \
     build-essential
 
 # Set the default user for the container
@@ -49,6 +50,8 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
 USER $USER
 
 WORKDIR /home/$USER
+
+RUN mkdir dev
 
 # Define default command (you can override it when running the container)
 CMD ["code", "tunnel"]
