@@ -51,6 +51,12 @@ USER $USER
 
 WORKDIR /home/$USER
 
+# install VS Code extensions
+RUN code --install-extension ms-python.python --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
+RUN code --install-extension ms-azuretools.vscode-docker --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
+RUN code --install-extension github.copilot --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
+RUN code --install-extension dbaeumer.vscode-eslint --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
+
 RUN mkdir dev
 
 RUN git config --global user.name "Mike Osborne"
