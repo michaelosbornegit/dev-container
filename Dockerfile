@@ -53,5 +53,8 @@ WORKDIR /home/$USER
 
 RUN mkdir dev
 
+RUN git config --global user.name "Mike Osborne"
+RUN git config --global user.email "resonatortune@gmail.com"
+
 # Define default command (you can override it when running the container)
 CMD ["code", "tunnel"]
