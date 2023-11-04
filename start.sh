@@ -16,6 +16,7 @@ docker run \
   --name=$container_name \
   -v '/var/run/docker.sock':'/var/run/docker.sock':'rw' \
   -v $container_name:/home/mike \
+  -p 8998:8443 \
   $container_name
 docker exec $container_name sudo chmod 666 /var/run/docker.sock
 docker exec -it $container_name /bin/zsh

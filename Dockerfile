@@ -34,12 +34,20 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | b
 USER root
 
 # Install Visual Studio Code CLI
-RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-RUN sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-RUN sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-RUN rm -f packages.microsoft.gpg
+# RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+# RUN sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+# RUN sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+# RUN rm -f packages.microsoft.gpg
 
-RUN apt-get update && apt-get install -y code
+# RUN apt-get update && apt-get install -y code
+
+# install VS Code (code-server)
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+# install VS Code extensions
+RUN code-server --install-extension redhat.vscode-yaml \
+                --install-extension ms-python.python \
+                --install-extension ms-azuretools.vscode-docker
 
 # Install Docker client
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
@@ -54,4 +62,4 @@ WORKDIR /home/$USER
 RUN mkdir dev
 
 # Define default command (you can override it when running the container)
-CMD ["code", "tunnel"]
+EXPOSE 8443
