@@ -58,6 +58,7 @@ RUN code --install-extension ms-python.python --extensions-dir "./.vscode-server
 RUN code --install-extension ms-azuretools.vscode-docker --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
 RUN code --install-extension github.copilot --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
 RUN code --install-extension dbaeumer.vscode-eslint --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
+RUN code --install-extension johnpapa.vscode-peacock --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings"
 
 RUN mkdir dev
 
