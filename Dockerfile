@@ -10,7 +10,8 @@ RUN apt-get update && \
     sudo \
     gpg \
     python3-venv \
-    build-essential
+    build-essential \
+    screen
 
 # Set the default user for the container
 ENV USER mike
@@ -20,6 +21,8 @@ USER $USER
 
 # Set the ZSH_THEME and add the plugin to .zshrc
 COPY .zshrc /home/$USER/.zshrc
+
+COPY .screenrc /home/$USER/.screenrc
 
 COPY permissions_sock.sh /home/$USER/permissions_sock.sh
 
@@ -67,3 +70,4 @@ RUN git config --global user.email "resonatortune@gmail.com"
 
 # Define default command (you can override it when running the container)
 CMD code tunnel --name ${USER}
+# CMD code tunnel --extensions-dir "./.vscode-server/extensions" --user-data-dir "./.vscode-server/settings" --name $USER
