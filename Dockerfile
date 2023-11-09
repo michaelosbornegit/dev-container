@@ -21,6 +21,8 @@ USER $USER
 # Set the ZSH_THEME and add the plugin to .zshrc
 COPY .zshrc /home/$USER/.zshrc
 
+COPY permissions_sock.sh /home/$USER/permissions_sock.sh
+
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -63,4 +65,4 @@ RUN git config --global user.name "Mike Osborne"
 RUN git config --global user.email "resonatortune@gmail.com"
 
 # Define default command (you can override it when running the container)
-CMD code tunnel --name mike-dev 
+CMD code tunnel --name ${USER}
